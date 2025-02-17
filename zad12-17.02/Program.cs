@@ -4,48 +4,53 @@ using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 
 namespace zad12_17._02
 {
-    internal class Program
+
+    class Program
     {
-        static void Main(string[] args)
+        static void BubbleSort(List<Student> students)
         {
-            Student[] students =
+            int n = students.Count;
+            for (int i = 0; i < n; i++)
             {
-             new Student("John", 20),
-             new Student("Jane", 19),
-             new Student("Alice", 24),
-             new Student("Bob", 23)
-            };
-
-             
-
-            foreach(var student in students)
-            {
-                Console.WriteLine(student);
+                for (int j = 0; j < n - i - 1; j++)
+                {
+                    if (students[j].Age > students[j + 1].Age)
+                    {
+                        var temp = students[j];
+                        students[j] = students[j + 1];
+                        students[j + 1] = temp;
+                    }
+                }
             }
+        }
 
-            Console.WriteLine();
+        static void Main()
+        {
+            List<Student> students = new List<Student>
+        {
+            new Student("Ivan", 16),
+            new Student("Maria", 15),
+            new Student("Georgi", 17),
+            new Student("Elena", 14)
+        };
 
-            BubbleSort(students);
-
+            Console.WriteLine("Преди сортиране:");
             foreach (var student in students)
             {
                 Console.WriteLine(student);
             }
 
+            BubbleSort(students);
 
-        }
-
-        static void BubbleSort(Student[] students)
-        {
-            int n = students.Length;
-            for (int i = 0; i < n - 1; i++)
-                for (int j = 0; j < n - i - 1; j++)
-                    if (students[j].Age > students[j + 1].Age)
-                        (students[j], students[j + 1]) = (students[j + 1], students[j]);
-
+            Console.WriteLine("\nСлед сортиране:");
+            foreach (var student in students)
+            {
+                Console.WriteLine(student);
+            }
         }
     }
 }
